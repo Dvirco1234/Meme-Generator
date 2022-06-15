@@ -1,0 +1,19 @@
+button {
+    background-color: var(--clr3);
+    border-radius: 15%;
+    border: none;
+    /* padding: 10px; */
+}
+
+.meme-controls .btn {
+    font-size: 2em;
+    min-width: 55px;
+    min-height: 55px;
+}
+
+.icon img {
+    height: 1em;
+}
+.icon.txt img {
+    height: 1.5em;
+}

@@ -2,10 +2,10 @@
     box-sizing: border-box;
 }
 
-/* html {
-    font-family: Lato-Regular, sans-serif;
-    color: var(--clr3);
-} */
+html {
+    font-family: Montserrat-Regular, sans-serif;
+    color: var(--clr4);
+}
 
 body {
     margin: 0;
@@ -13,7 +13,7 @@ body {
 }
 
 a {
-    color: var(--clr2);
+    color: black;
     text-decoration: none;
 }
 
@@ -21,20 +21,9 @@ a:hover {
     text-decoration: none;
 }
 
-button {
-    background-color: var(--clr3);
-    border-radius: 5px;
-    border: none;
-    padding: 10px;
-}
-
 img {
     width: 100%;
 }
-
-/* .canvas-container {
-    background-color: black;
-} */
 
 canvas {
     display: block;
