@@ -36,28 +36,31 @@
             </div>
             <div class="meme-controls flex wrap">
                 <div class="actions flex justify-center align-center">
-                    <input type="text" oninput="onEnterText(this.value)">
+                    <input class="meme-input" type="text" oninput="onEnterText(this.value)" placeholder="Meme Text Here">
                 </div>
                 <div class="actions flex justify-center align-center">
-                    <button class="act-btn" onclick="onMoveText('up')">&uarr;</button>
-                    <button class="act-btn" onclick="onMoveText('down')">&darr;</button>
-                    <button class="act-btn fa fa-arrows"></button>
-                    <button class="act-btn fa fa-plus"></button>
-                    <button class="act-btn fa fa-trash"></button>
+                    <button class="btn act-btn" onclick="onMoveText('up')">&uarr;</button>
+                    <button class="btn act-btn" onclick="onMoveText('down')">&darr;</button>
+                    <button class="btn act-btn icon" onclick="onSelectNextLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                    <button class="btn act-btn fa fa-plus" onclick="onAddLine()"></button>
+                    <button class="btn act-btn fa fa-trash" onclick="onDeleteLine()"></button>
                 </div>
                 <div class="actions flex justify-center align-center">
-                    <button class="act-btn fa fa-a" onclick="onChangFontSize(1)">+</button>
-                    <button class="act-btn fa fa-a" onclick="onChangFontSize(-1)">-</button>
-                    <button class="act-btn fa fa-align-l" onclick="onChangTextAlign('l')"></button>
-                    <button class="act-btn fa fa-align-c" onclick="onChangTextAlign('c')"></button>
-                    <button class="act-btn fa fa-align-r" onclick="onChangTextAlign('r')"></button>
-                    <select name="" id=""></select>
-                    <button class="act-btn"></button>
-                    <input class="act-btn fa fa-color" type="color">
+                    <button class="btn act-btn icon" onclick="onChangFontSize(2)"><img src="icons/increase font - icon.png"></button>
+                    <button class="btn act-btn icon" onclick="onChangFontSize(-2)"><img src="icons/decrease font - icon.png"></button>
+                    <button class="btn act-btn fa fa-align-l" onclick="onChangTextAlign('l')"></button>
+                    <button class="btn act-btn fa fa-align-c" onclick="onChangTextAlign('c')"></button>
+                    <button class="btn act-btn fa fa-align-r" onclick="onChangTextAlign('r')"></button>
+                    <select name="" class="btn act-btn"></select>
+                    <button class="btn act-btn icon txt"><img src="icons/text stroke.png"></button>
+                    <input class="btn act-btn fa fa-color" type="color" value="#ffffff" onchange="onSetColor(this.value)">
                 </div>
-                <div class="actions flex align-center">
-                    <div class="actions"></div>
-                    <button class="btn-share" onclick="toggleModal()">Share</button>
+                <div class="actions flex align-center justify-center">
+                    <!-- <div class="actions"></div> -->
+                    <!-- <button class="btn-download" onclick="toggleModal()">Download</button> -->
+                    <a href="#" class="btn btn-download" onclick="downloadCanvas(this)" download="file-name">Download</a>
+                    <button class="btn btn-save" onclick="saveCanvas()">Save</button>
+                    <button class="btn btn-share" onclick="shareCanvas()">Share</button>
                 </div>
             </div>
         </section>
@@ -65,8 +68,9 @@
     </section>
     <footer></footer>
 
-    <script src="js/services/gallery-service.js"></script>
-    <script src="js/services/meme-service.js"></script>
-    <script src="js/controller.js"></script>
+    <script src="js/services/galleryService.js"></script>
+    <script src="js/services/memeService.js"></script>
+    <script src="js/galleryController.js"></script>
+    <script src="js/memeController.js"></script>
 </body>
 </html>
