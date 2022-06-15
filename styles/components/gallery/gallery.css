@@ -1,0 +1,8 @@
+.main-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px , 1fr));
+    /* display: none; */
+}
+
+/* .image {
+    max-width: 300px;
+} */

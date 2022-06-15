@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+/* html {
+    font-family: Lato-Regular, sans-serif;
+    color: var(--clr3);
+} */
+
+body {
+    margin: 0;
+    font-size: 1rem;
+}
+
+a {
+    color: var(--clr2);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button {
+    background-color: var(--clr3);
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+img {
+    width: 100%;
+}
+
+/* .canvas-container {
+    background-color: black;
+} */
+
+canvas {
+    display: block;
+    margin: auto;
+}
+
+/* input {
+    border: none;
+    border-bottom: 1px solid var(--clr2);
+    background-color: transparent;
+    padding: 1em 0;
+    max-width: 400px;
+    width: 100%; 
+} */

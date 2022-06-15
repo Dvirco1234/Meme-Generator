@@ -1,0 +1,13 @@
+.main-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main-container {
+    padding: 20px;
+}
+/* .main-content {
+    border-right: 1px solid #e1e0e0;
+    border-left: 1px solid #e1e0e0;
+} */
+

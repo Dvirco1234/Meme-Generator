@@ -1,0 +1,50 @@
+.main-meme {
+    width: 100%;
+    height: 70vh;
+}
+
+.canvas-container {
+    flex-basis: 50%;
+}
+
+.meme-controls {
+    flex-basis: 50%;
+}
+
+.meme-controls .actions {
+    flex-basis: 100%;
+    background-color: antiquewhite;
+    /* width: 100%; */
+}
+
+.actions > * {
+    margin: 0 5px 10px;
+}
+
+
+
+
+.fa-arrows::before {
+    content: "\f883";
+}
+.fa-plus::before {
+    content: "\2b";
+}
+.fa-trash::before {
+    content: "\f2ed";
+}
+.fa-a::before {
+    content: "\41";
+}
+.fa-align-l::before {
+    content: "\f036";
+}
+.fa-align-c::before {
+    content: "\f037";
+}
+.fa-align-r::before {
+    content: "\f038";
+}
+.fa-color::before {
+    content: "\f53f";
+}

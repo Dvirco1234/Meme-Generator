@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Gen</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body onload="onInit()">
+    <header class="main-header">
+        <div class="header-content main-layout flex align-center space-between">
+            <div class="main-logo"><img src="img/logo/logo.png" alt=""></div>
+            <ul class="main-nav flex">
+                <!-- <li class="dropdown nav-btns flex" onclick="openNavDropdown(this)">
+                    <a class="first-a" href="#">Journal</a>
+                </li> -->
+                <li class="nav-btns"><a href="#">Gallery</a></li>
+                <!-- <li class="nav-btns"><a href="#">My Memes</a></li> -->
+                <li class="nav-btns"><a href="#">About</a></li>
+            </ul>
+            <!-- <button class="menu-toggle" onclick="toggleMenu()"><span>☰</span></button> -->
+        </div>
+    </header>
+
+    <section class="main-container main-layout">
+        <section class="main-gallery grid"></section>
+
+        <section class="main-meme flex">
+            <div class="canvas-container">
+                <canvas class="my-canvas"
+                    height="450"
+                    width="450"
+                    onclick="draw(event)">
+                </canvas>
+            </div>
+            <div class="meme-controls flex wrap">
+                <div class="actions flex justify-center align-center">
+                    <input type="text" oninput="onEnterText(this.value)">
+                </div>
+                <div class="actions flex justify-center align-center">
+                    <button class="act-btn" onclick="onMoveText('up')">&uarr;</button>
+                    <button class="act-btn" onclick="onMoveText('down')">&darr;</button>
+                    <button class="act-btn fa fa-arrows"></button>
+                    <button class="act-btn fa fa-plus"></button>
+                    <button class="act-btn fa fa-trash"></button>
+                </div>
+                <div class="actions flex justify-center align-center">
+                    <button class="act-btn fa fa-a" onclick="onChangFontSize(1)">+</button>
+                    <button class="act-btn fa fa-a" onclick="onChangFontSize(-1)">-</button>
+                    <button class="act-btn fa fa-align-l" onclick="onChangTextAlign('l')"></button>
+                    <button class="act-btn fa fa-align-c" onclick="onChangTextAlign('c')"></button>
+                    <button class="act-btn fa fa-align-r" onclick="onChangTextAlign('r')"></button>
+                    <select name="" id=""></select>
+                    <button class="act-btn"></button>
+                    <input class="act-btn fa fa-color" type="color">
+                </div>
+                <div class="actions flex align-center">
+                    <div class="actions"></div>
+                    <button class="btn-share" onclick="toggleModal()">Share</button>
+                </div>
+            </div>
+        </section>
+        <section class="my-memes"></section>
+    </section>
+    <footer></footer>
+
+    <script src="js/services/gallery-service.js"></script>
+    <script src="js/services/meme-service.js"></script>
+    <script src="js/controller.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.flex {
+    display: flex;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.wrap {
+    flex-wrap: wrap;
+}
+
+.grid {
+    display: grid;
+    gap: .7em;
+}
+
+.clean-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.mont {
+    font-family: Montserrat-Regular;
+}
+
+.fa {
+    font-family: fa-solid;
+}
