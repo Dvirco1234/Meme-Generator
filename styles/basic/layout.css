@@ -5,6 +5,7 @@
 
 .main-container {
     padding: 20px;
+    background-color: var(--clr2);
 }
 /* .main-content {
     border-right: 1px solid #e1e0e0;

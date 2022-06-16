@@ -16,7 +16,7 @@
                     <a class="first-a" href="#">Journal</a>
                 </li> -->
                 <li class="nav-btns"><a href="#">Gallery</a></li>
-                <!-- <li class="nav-btns"><a href="#">My Memes</a></li> -->
+                <li class="nav-btns"><a href="#">My Memes</a></li>
                 <li class="nav-btns"><a href="#">About</a></li>
             </ul>
             <!-- <button class="menu-toggle" onclick="toggleMenu()"><span>☰</span></button> -->
@@ -24,7 +24,20 @@
     </header>
 
     <section class="main-container main-layout">
-        <section class="main-gallery grid"></section>
+        <section class="main-gallery">
+            <div class="search-bar">
+                <button class="btn btn-gallery">I'm Flexible</button>
+                <input list="images">
+                <datalist id="images">
+                    <!-- <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Google Chrome">
+                    <option value="Opera">
+                    <option value="Safari"> -->
+                </datalist>
+            </div>
+            <div class="gallery-imgs grid"></div>
+        </section>
 
         <section class="main-meme flex">
             <div class="canvas-container">
@@ -53,7 +66,10 @@
                     <button class="btn act-btn fa fa-align-r" onclick="onChangTextAlign('r')"></button>
                     <select name="" class="btn act-btn"></select>
                     <button class="btn act-btn icon txt"><img src="icons/text stroke.png"></button>
-                    <input class="btn act-btn fa fa-color" type="color" value="#ffffff" onchange="onSetColor(this.value)">
+                    <div class="btn act-btn relative">
+                        <input class="btn act-btn color-input" type="color" value="#ffffff" onchange="onSetColor(this.value)">
+                        <img class="icon paint-icon" src="icons/paint-board-and-brush.png">
+                    </div>
                 </div>
                 <div class="actions flex align-center justify-center">
                     <!-- <div class="actions"></div> -->
@@ -66,7 +82,9 @@
         </section>
         <section class="my-memes"></section>
     </section>
-    <footer></footer>
+    <footer class="main-layout flex align-center space-between">
+        <div class="main-logo"><img src="img/logo/logo.png" alt=""></div>
+    </footer>
 
     <script src="js/services/galleryService.js"></script>
     <script src="js/services/memeService.js"></script>

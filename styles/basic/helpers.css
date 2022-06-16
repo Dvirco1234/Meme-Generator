@@ -33,6 +33,10 @@
     font-family: Montserrat-Regular;
 }
 
+.relative{
+    position: relative;
+}
+
 .fa {
     font-family: fa-solid;
 }

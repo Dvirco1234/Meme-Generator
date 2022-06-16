@@ -18,7 +18,7 @@ function renderGallery() {
         (img, i) =>
             `<artice class="image" onclick="onImgSelect(${i})"><img class="image${i}" src="${img.url}"></artice>`
     )
-    document.querySelector('.main-gallery').innerHTML = strHTMLs.join('')
+    document.querySelector('.gallery-imgs').innerHTML = strHTMLs.join('')
 }
 
 function onImgSelect(imgIdx) {

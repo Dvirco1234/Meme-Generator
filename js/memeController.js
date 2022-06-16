@@ -8,6 +8,7 @@ function initCreateMeme() {
     gCanvas = document.querySelector('.my-canvas')
     gCtx = gCanvas.getContext('2d')
     resizeCanvas()
+    addListeners()
     renderMeme()
 }
 
@@ -30,6 +31,18 @@ function renderLines(meme){
     })
 }
 
+function addMouseListeners() {
+    gCanvas.addEventListener('mousemove', onMove)
+    gCanvas.addEventListener('mousedown', onDown)
+    gCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gCanvas.addEventListener('touchmove', onMove)
+    gCanvas.addEventListener('touchstart', onDown)
+    gCanvas.addEventListener('touchend', onUp)
+}
+
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     gCanvas.width = elContainer.offsetWidth - 50
@@ -43,21 +56,26 @@ function onEnterText(txt) {
 
 function drawText(currLine) {
     const text = currLine.txt
-    const txtLength = gCtx.measureText(text).width
+    // const txtLength = gCtx.measureText(text).width
     const align = currLine.align
-    var x 
+    let x 
     switch (align) {
         case 'c':
-            x = gCanvas.width / 2 - txtLength / 2
+            x = gCanvas.width / 2
+            gCtx.textAlign = 'center'
             break
         case 'l':
             x = 20
+            gCtx.textAlign = 'start'
             break
         case 'r':
-            x = gCanvas.width - 20 - txtLength 
+            x = gCanvas.width - 20 
+            gCtx.textAlign = 'end'
             break
     }
     const y = currLine.posY
+
+    
 
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
@@ -66,35 +84,6 @@ function drawText(currLine) {
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
 }
-// function drawText(text) {
-//     const txtLength = gCtx.measureText(text).width
-//     const meme = getMeme()
-//     // const pos = getTextAlign()
-//     var x 
-//     // var x = findPos(pos)
-//     switch (pos) {
-//         case 'c':
-//             x = gCanvas.width / 2 - txtLength / 2
-//             break
-//         case 'l':
-//             x = 20
-//             break
-//         case 'r':
-//             x = gCanvas.width - 20 - txtLength 
-//             break
-//     }
-// gCtx.textAlign = 'center'
-// gCtx.textAlign = 'start'
-// gCtx.textAlign = 'end'
-
-
-//     gCtx.lineWidth = 2
-//     gCtx.strokeStyle = 'black'
-//     gCtx.fillStyle = 'white'
-//     gCtx.font = '40px Impact'
-//     gCtx.fillText(text, x, 80)
-//     gCtx.strokeText(text, x, 80)
-// }
 
 function onMoveText(direc){
     moveText(direc, gCanvas)
@@ -135,6 +124,8 @@ function onSetColor(color){
     setColor(color)
     renderMeme()
 }
+
+//     const txtLength = gCtx.measureText(text).width
 
 // function renderSelectBorder(){
 //     const line = getCurrLine()

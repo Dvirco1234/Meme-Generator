@@ -56,6 +56,7 @@ function selectNextLine(){
 function changeFontSize(diff){
     const line = _getCurrLine()
     line.size += diff
+    console.log(line.size);
 }
 
 function setColor(color){

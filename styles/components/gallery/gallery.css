@@ -1,6 +1,10 @@
-.main-gallery {
+.gallery-imgs {
     grid-template-columns: repeat(auto-fill, minmax(150px , 1fr));
     /* display: none; */
+}
+
+.gallery-imgs .image:hover {
+    cursor: pointer;
 }
 
 /* .image {
