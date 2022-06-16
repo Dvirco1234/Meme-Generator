@@ -1,0 +1,19 @@
+.my-memes {
+    /* min-height: 65vh; */
+}
+
+.my-memes .memes-imgs {
+    grid-template-columns: repeat(auto-fit, minmax(150px , 1fr));
+}
+/* .my-memes .memes-imgs .image {
+    width: 100px;
+    height: 100px;
+}
+.my-memes .memes-imgs .image img{
+    width: 100%;
+    height: 100%;
+} */
+
+.my-memes .memes-imgs .image:hover {
+    cursor: pointer;
+}

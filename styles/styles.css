@@ -11,6 +11,7 @@
 /* COMPONENTS */
 @import 'components/gallery/gallery.css';
 @import 'components/meme/meme-edit.css';
+@import 'components/my-memes.css';
 @import 'components/main-header.css';
 @import 'components/footer.css';
 /* @import 'components/card.css';
@@ -19,4 +20,4 @@
 @import 'components/modal.css'; */
 
 /* Media Queries */
-/* @import 'mq/mq.css'; */
+@import 'mq/mq.css';

@@ -1,19 +1,13 @@
 'use strict'
 
-// var gCanvas
-// var gCtx
-// var gCurrLine = 1
-
 function onInit() {
-    // gCanvas = document.querySelector('.my-canvas')
-    // gCtx = gCanvas.getContext('2d')
-    // console.log(gCtx)
     renderGallery()
-    // resizeCanvas()
+    loadMyMemes()
 }
 
 function renderGallery() {
-    const imgs = getImages()
+    const imgs = getImagesForDisplay()
+    // const imgs = getImages()
     const strHTMLs = imgs.map(
         (img, i) =>
             `<artice class="image" onclick="onImgSelect(${i})"><img class="image${i}" src="${img.url}"></artice>`
@@ -24,8 +18,36 @@ function renderGallery() {
 function onImgSelect(imgIdx) {
     // const img = getImgByIdx(imgIdx)
     // renderImg(imgIdx)
+    createNewMeme()
     setCurrImage(imgIdx)
-    document.querySelector('.main-gallery').style.display = 'none'
-    document.querySelector('.main-meme').style.display = 'flex'
-    initCreateMeme()
+    goToMemeEdit()
+}
+
+function goToMemeEdit(){
+    openMemeEditor()
+    initEditMeme()
+}
+
+function openGallery(){
+    document.querySelector('.main-gallery').style.display = 'block'
+    document.querySelector('.main-meme').style.display = 'none'
+    document.querySelector('.my-memes').style.display = 'none'
+
+    document.body.classList.remove('menu-open')
+}
+
+function onFlexChoose(){
+    createRandMeme()
+    goToMemeEdit()
+    // const linesCount = getRandomIntInclusive(1, 2)
+    // if(linesCount === 2) addRandLine()
+}
+
+function onSetFilter(txt) {
+    setFilter(txt)
+	renderGallery()
+}
+
+function toggleMenu(){
+    document.body.classList.toggle('menu-open')
 }

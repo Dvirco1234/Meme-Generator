@@ -1,71 +1,22 @@
 .main-footer {
     flex-direction: column;
     align-items: center;
+    background-color: var(--clr1);
     border-top: 1px solid #e1e0e0;
 }
 
-.main-footer h1 {
-    margin: 5rem  0 2rem;
-    font-family: eurofurence_regular, sans-serif;
-    font-size: 2.5rem;
-    color: #292929;
-    letter-spacing: -0.8px;
+.main-footer .main-logo {
+    margin: 4.3rem  0 .5rem;
 }
 
 .main-footer small {
-    font-family: Lato-Regular;
-    color: #a6a6a6;
-    font-size: 0.8125rem;
-    letter-spacing: .6px;
-    margin: 0 0 2.375rem;
+    font-family: Montserrat-Regular;
+    color: var(--clr3);
+    font-size: 1rem;
+    /* letter-spacing: .6px; */
+    margin: 0 0 4.3rem;
 }
-.main-footer small span {
+/* .main-footer small span {
     font-family: Lato-Bold;
     color: #939292;
-}
-
-.main-footer .icon {
-    position: relative;
-    height: 2.5rem;
-    width: 2.5rem;
-    background-color: #e5e5e5;
-    margin: 0 1.25rem 5rem;
-}
-.main-footer .icon:hover {
-    cursor: pointer;
-}
-.main-footer .facebook:hover {
-    background-color: rgb(27,116,228);
-}
-.main-footer .twitter:hover {
-    background-color: rgb(29,160,243);
-}
-.main-footer .behance:hover {
-    background-color: rgb(16,94,251);
-}
-.main-footer .dribbble:hover {
-    background-color: rgb(235,77,137);
-}
-
-.fa-facebook-f::before {
-    content: "\f39e";
-}
-.fa-twitter::before {
-    content: "\f099";
-}
-.fa-behance::before {
-    content: "\f1b4";
-}
-.fa-dribbble::before {
-    content: "\f17d";
-}
-
-.icon a {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);   
-    color: var(--clr1); 
-    /* height: 1rem; */
-    font-size: 1rem;
-}
+} */

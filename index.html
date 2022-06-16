@@ -10,24 +10,20 @@
 <body onload="onInit()">
     <header class="main-header">
         <div class="header-content main-layout flex align-center space-between">
-            <div class="main-logo"><img src="img/logo/logo.png" alt=""></div>
+            <div class="main-logo" onclick="openGallery()"><img src="img/logo/logo.png"></div>
             <ul class="main-nav flex">
-                <!-- <li class="dropdown nav-btns flex" onclick="openNavDropdown(this)">
-                    <a class="first-a" href="#">Journal</a>
-                </li> -->
-                <li class="nav-btns"><a href="#">Gallery</a></li>
-                <li class="nav-btns"><a href="#">My Memes</a></li>
+                <li class="nav-btns"><a href="#" onclick="openGallery()">Gallery</a></li>
+                <li class="nav-btns"><a href="#" onclick="openMyMemes()">My Memes</a></li>
                 <li class="nav-btns"><a href="#">About</a></li>
             </ul>
-            <!-- <button class="menu-toggle" onclick="toggleMenu()"><span>☰</span></button> -->
+            <button class="menu-toggle" onclick="toggleMenu()"><span>☰</span></button>
         </div>
     </header>
 
     <section class="main-container main-layout">
         <section class="main-gallery">
-            <div class="search-bar">
-                <button class="btn btn-gallery">I'm Flexible</button>
-                <input list="images">
+            <div class="search-bar flex align-center space-between">
+                <input class="filter-input" list="images" type="search" oninput="onSetFilter(this.value)" placeholder="Search Image">
                 <datalist id="images">
                     <!-- <option value="Internet Explorer">
                     <option value="Firefox">
@@ -35,6 +31,7 @@
                     <option value="Opera">
                     <option value="Safari"> -->
                 </datalist>
+                <button class="btn btn-gallery" onclick="onFlexChoose()">I'm Flexible</button>
             </div>
             <div class="gallery-imgs grid"></div>
         </section>
@@ -44,7 +41,7 @@
                 <canvas class="my-canvas"
                     height="450"
                     width="450"
-                    onclick="draw(event)">
+                    onclick1="draw(event)">
                 </canvas>
             </div>
             <div class="meme-controls flex wrap">
@@ -74,21 +71,29 @@
                 <div class="actions flex align-center justify-center">
                     <!-- <div class="actions"></div> -->
                     <!-- <button class="btn-download" onclick="toggleModal()">Download</button> -->
-                    <a href="#" class="btn btn-download" onclick="downloadCanvas(this)" download="file-name">Download</a>
-                    <button class="btn btn-save" onclick="saveCanvas()">Save</button>
-                    <button class="btn btn-share" onclick="shareCanvas()">Share</button>
+                    <a href="#" class="btn txt-btn btn-download" onclick="onDownloadMeme(this)" download="file-name">Download</a>
+                    <button class="btn txt-btn btn-save" onclick="onSaveMeme()">Save</button>
+                    <button class="btn txt-btn btn-share" onclick="onUploadImg()">Upload</button>
+                    <div class="share-container"></div>
                 </div>
             </div>
         </section>
-        <section class="my-memes"></section>
+        <section class="my-memes">
+            <div class="memes-imgs grid"></div>
+        </section>
     </section>
-    <footer class="main-layout flex align-center space-between">
+    <footer class="main-footer flex align-center space-between">
         <div class="main-logo"><img src="img/logo/logo.png" alt=""></div>
+        <small>&#169; Dvir Cohen 2022</small>
     </footer>
 
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/utils-service.js"></script>
+    <script src="js/services/upload-service.js"></script>
     <script src="js/services/galleryService.js"></script>
     <script src="js/services/memeService.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/memeController.js"></script>
+    <script src="js/myMemesController.js"></script>
 </body>
 </html>
