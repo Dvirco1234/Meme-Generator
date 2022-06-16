@@ -2,13 +2,13 @@
 
 var gCanvas
 var gCtx
-var gCurrLine = 1
+// var gCurrLine = 1
 
 function initCreateMeme() {
     gCanvas = document.querySelector('.my-canvas')
     gCtx = gCanvas.getContext('2d')
     resizeCanvas()
-    // addListeners()
+    addListeners()
     renderMeme()
 }
 
@@ -16,7 +16,6 @@ function renderMeme(){
     const meme = getMeme()
     renderImg(meme.selectedImgId)
     renderLines(meme)
-    // if(meme.isSelected) renderSelectBorder()
 }
 
 function renderImg(i) {
@@ -34,8 +33,12 @@ function renderLines(meme){
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        // renderCanvas()
+        renderMeme()
+    })
 }
-
 
 function addMouseListeners() {
     gCanvas.addEventListener('mousemove', onMove)
@@ -48,6 +51,53 @@ function addTouchListeners() {
     gCanvas.addEventListener('touchstart', onDown)
     gCanvas.addEventListener('touchend', onUp)
 }
+
+function onDown(ev) {
+    const pos = getEvPos(ev)
+    if (!isTextClicked(pos)) return
+    // setCircleDrag(true)
+    // //Save the pos we start from 
+    // gStartPos = pos
+    // document.body.style.cursor = 'grabbing'
+
+}
+
+function onMove(ev) {
+    // const circle = getCircle();
+    // if (circle.isDrag) {
+    //     const pos = getEvPos(ev)
+    //     //Calc the delta , the diff we moved
+    //     const dx = pos.x - gStartPos.x
+    //     const dy = pos.y - gStartPos.y
+    //     moveCircle(dx, dy)
+    //     //Save the last pos , we remember where we`ve been and move accordingly
+    //     gStartPos = pos
+    //     //The canvas is render again after every move
+    //     renderCanvas()
+    // }
+}
+
+function onUp() {
+    // setCircleDrag(false)
+    // document.body.style.cursor = 'grab'
+}
+
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    if (gTouchEvs.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+        }
+    }
+    return pos
+}
+
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
@@ -71,15 +121,15 @@ function drawText(currLine) {
             gCtx.textAlign = 'center'
             break
         case 'l':
-            x = 20
+            x = 30
             gCtx.textAlign = 'start'
             break
         case 'r':
-            x = gCanvas.width - 20 
+            x = gCanvas.width - 30 
             gCtx.textAlign = 'end'
             break
     }
-    const y = currLine.posY
+    const y = currLine.pos.y
 
     
 
@@ -89,6 +139,7 @@ function drawText(currLine) {
     gCtx.font = `${currLine.size}px Impact`
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
+    if(currLine.isSelected) renderSelectBorder(currLine)
 }
 
 function onMoveText(direc){
@@ -112,7 +163,7 @@ function onSelectNextLine(){
     const line = getCurrLine()
     document.querySelector('.meme-input').value = line.txt
     updateSelection()
-    // renderMeme()
+    renderMeme()
     // renderSelectBorder()
 }
 
@@ -133,24 +184,21 @@ function onSetColor(color){
 
 //     const txtLength = gCtx.measureText(text).width
 
-// function renderSelectBorder(){
-//     const line = getCurrLine()
-//     const y = line.posY + line.size + 10
-//     const x = 30
-//     const z = line.size + 20
-//     // drawRect(x,y,z)
-//     drawRect()
-// }
+function renderSelectBorder(line){
+    // const line = getCurrLine()
+    const y = line.pos.y - line.size - 10
+    const x = 20
+    const z = line.size + 30
+    drawRect(x,y,z)
+}
 
-// function drawRect(x, y, z) { 
-// function drawRect() { 
-//     gCtx.beginPath() 
-//     gCtx.lineWidth = 2
-//     gCtx.rect(25, 25, 100, 100)  
-//     gCtx.fillStyle = '#00000000'
-//     gCtx.fillRect(25, 25, 100, 100)
-//     // gCtx.fillRect(x, y, gCanvas.width - x*2, z)
-//     gCtx.strokeStyle = 'black'
-//     gCtx.stroke()
-// }
+function drawRect(x, y, z) { 
+    gCtx.beginPath() 
+    gCtx.lineWidth = 2
+    gCtx.rect(x, y, gCanvas.width - x*2, z)
+    gCtx.fillStyle = '#00000000'
+    gCtx.fillRect(x, y, gCanvas.width - x*2, z)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+}
 
