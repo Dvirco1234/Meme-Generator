@@ -1,17 +1,17 @@
 
 @font-face {
     font-family: Montserrat-Medium;
-    src: url(fonts/montserrat/Montserrat-Medium.ttf);
+    src: url(/fonts/montserrat/Montserrat-Medium.ttf);
 }
 @font-face {
     font-family: Montserrat-Regular;
-    src: url(fonts/montserrat/Montserrat-Regular.ttf);
+    src: url(/fonts/montserrat/Montserrat-Regular.ttf);
 }
 @font-face {
     font-family: Montserrat-Thin;
-    src: url(fonts/montserrat/Montserrat-Thin.ttf);
+    src: url(/fonts/montserrat/Montserrat-Thin.ttf);
 }
 @font-face {
     font-family: fa-solid;
-    src: url(fonts/fa/fa-solid-900.ttf);
+    src: url(/fonts/fa/fa-solid-900.ttf);
 }

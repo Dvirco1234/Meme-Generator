@@ -8,7 +8,7 @@ function initCreateMeme() {
     gCanvas = document.querySelector('.my-canvas')
     gCtx = gCanvas.getContext('2d')
     resizeCanvas()
-    addListeners()
+    // addListeners()
     renderMeme()
 }
 
@@ -30,6 +30,12 @@ function renderLines(meme){
         drawText(line)
     })
 }
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+}
+
 
 function addMouseListeners() {
     gCanvas.addEventListener('mousemove', onMove)
