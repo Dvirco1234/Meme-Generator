@@ -1,5 +1,6 @@
 'use strict'
 
+const IMGS_KEY = 'imgsDB'
 var gImgs = []
 var gFilterTxt = ''
 // var gKeywordSearchCountMap = {'funny': 12,'cat': 16, 'baby': 3}
@@ -26,6 +27,11 @@ gImgs = [
     {id: 17, url: `img/17.jpg`, keyWords: ['explain', 'politician']},
 ]
 
+function loadMyImgs(){
+    const imgs = loadFromStorage(IMGS_KEY)
+    if(imgs) gImgs = imgs
+}
+
 function getImages(){
     return gImgs
 }
@@ -42,6 +48,28 @@ function getImgByIdx(imgIdx){
 function setFilter(txt){
     if (txt !== undefined) gFilterTxt = txt
     return gFilterTxt
+}
+
+function addImgToGallery(img) {
+    const url = img.src
+    const id = gImgs.length
+    const image = {id, url, keyWords: ['my pictures']}
+    gImgs.push(image)
+    // _saveImgsToStorage()
+    renderGallery()
+}
+
+function scaleToFit(img){
+    // get the scale
+    var scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+    // get the top left position of the image
+    var x = (canvas.width / 2) - (img.width / 2) * scale;
+    var y = (canvas.height / 2) - (img.height / 2) * scale;
+    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+}
+
+function _saveImgsToStorage() {
+	saveToStorage(IMGS_KEY, gImgs)
 }
 
 // function createImages(){

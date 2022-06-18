@@ -21,6 +21,7 @@ function onImgSelect(imgIdx) {
     createNewMeme()
     setCurrImage(imgIdx)
     goToMemeEdit()
+    resizeCanvasContainer(imgIdx)
 }
 
 function goToMemeEdit(){
@@ -51,3 +52,32 @@ function onSetFilter(txt) {
 function toggleMenu(){
     document.body.classList.toggle('menu-open')
 }
+
+function onSearchKeyWord(word, elSpan){
+    setFilter(word)
+    renderGallery()
+    if(!word) return
+    const style = window.getComputedStyle(elSpan, null).getPropertyValue('font-size');
+    const fontSize = parseFloat(style);
+    elSpan.style.fontSize = (fontSize + 2) + 'px'
+
+}
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, addImgToGallery)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    var reader = new FileReader()
+    //After we read the file
+    reader.onload = function (event) {
+        var img = new Image()// Create a new html img element
+        img.src = event.target.result // Set the img src to the img file we read
+        // const url = event.target.result
+        //Run the callBack func , To render the img on the canvas
+        img.onload = onImageReady.bind(null, img)
+        // console.log(img);
+    }
+    reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
+}
+

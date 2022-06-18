@@ -18,17 +18,16 @@ button {
     font-family: Montserrat-Medium; 
     background-color: var(--clr1);
     color: var(--clr3);
+    padding: .5em;
+}
+.meme-controls .txt-btn:hover {
+    background-color: var(--clr6);
 }
 
-/* .meme-controls .act-btn .color-input {
-    padding: 0;
+.meme-controls .btn:hover {
+    background-color: var(--clr7);
 }
-.meme-controls .btn {
-    padding: 0;
-}
-.meme-controls .btn {
-    padding: 0;
-} */
+
 .meme-controls .btn:hover {
     cursor: pointer;
 }

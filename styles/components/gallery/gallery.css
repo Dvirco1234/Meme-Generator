@@ -1,12 +1,12 @@
 .gallery-imgs {
-    grid-template-columns: repeat(auto-fill, minmax(150px , 1fr));
-    /* display: none; */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-rows: repeat(3, 1fr);
 }
 
 .gallery-imgs .image:hover {
     cursor: pointer;
+    opacity: 0.8;
 }
-
 
 .main-gallery .search-bar {
     min-height: 3em;
@@ -15,8 +15,9 @@
 
 .main-gallery .btn-gallery {
     font-family: Montserrat-Medium;
+    align-self: flex-start;
     border-radius: 15px;
-    padding: .3em;
+    padding: 0.3em;
     font-size: 1.5em;
     min-width: 55px;
     min-height: 55px;
@@ -26,6 +27,7 @@
 
 .main-gallery .btn-gallery:hover {
     cursor: pointer;
+    background-color: var(--clr6);
 }
 
 .search-bar input {
@@ -38,4 +40,47 @@
     font-family: Montserrat-Thin;
     width: 300px;
     margin-bottom: 10px;
-  }
+    align-self: flex-start;
+}
+
+.key-words {
+    font-family: Montserrat-Medium;
+    font-size: 1em;
+    flex-grow: 1;
+    height: 100%;
+    /* max-width: 40%; */
+    color: var(--clr1);
+}
+
+.key-words span:first-child {
+    color: var(--clr5);
+    font-size: 1.5em;
+}
+.key-words span:nth-child(even) {
+    font-size: 1.5em;
+}
+
+.key-words span {
+    cursor: pointer;
+}
+
+.search-bar .file-input {
+    position: relative;
+    color: transparent;
+    width: 200px;
+    padding: 0.3em;
+}
+.file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.search-bar .file-input::before {
+    position: absolute;
+    color: var(--clr3);
+    content: 'Upload Image';
+    padding: 0.3em;
+    margin: 0;
+    /* top: 50%;
+    bottom: 50%;
+    transform: translate(-50% -50%); */
+}

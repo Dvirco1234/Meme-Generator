@@ -3,19 +3,16 @@
 const KEY = 'memesDB'
 var gMyMemes = []
 var gMeme
-// var gMeme = {
-//     url: '',
-//     selectedImgId: 5,
-//     selectedLineIdx: 0,
-//     lines: [{ txt: 'Meme', size: 40, align: 'c', color: 'white', pos : {y: 80, x: 0}, isSelected: false, isDrag: false}],
-// }
+var gEmojies = {emojies: ['😀', '😂', '🤣', '😅', '😕', '😨', '😓', '🤯', '😱'] , currIdx: 0}
+
 var gMemeCanvas
 
 function createNewMeme(){
     gMeme = {
+        url: '',
         selectedImgId: 5,
         selectedLineIdx: 0,
-        lines: [{ txt: 'Meme', size: 40, align: 'c', color: 'white', pos : {y: 80, x: 0}, isSelected: false, isDrag: false}],
+        lines: [{ txt: 'Meme', size: 40, align: 'c', strokeColor: 'black', color: 'white', pos : {y: 80, x: 0}, isSelected: false, isDrag: false}],
     }
 }
 
@@ -68,17 +65,40 @@ function moveLine(dx, dy) {
     line.pos.y += dy
 }
 
+function getEmojies(){
+    var emojies = gEmojies.emojies
+    console.log(emojies);
+    const startIdx = gEmojies.currIdx * 3
+	emojies = emojies.slice(startIdx, startIdx + 3)
+    return emojies
+}
+
+function slideEmojies(isNext) {
+	if (isNext) gEmojies.currIdx++
+	else gEmojies.currIdx--
+
+    if (gEmojies.currIdx * 3 >= gEmojies.emojies.length ) gEmojies.currIdx = 0
+    else if (gEmojies.currIdx < 0) gEmojies.currIdx = gEmojies.emojies.length/3 - 1
+}
+
+function addEmojyLine(emojy){
+    const newLine = { txt: emojy, size: 40, align: 'c', strokeColor: 'black', color: 'white', pos:{y: 80, x: 0}, isDrag: false}
+    newLine.pos.x = canvas.width/2
+}
+
 function moveText(direc){
     const line = _getCurrLine()
     if(direc === 'up') line.pos.y -= 20
     else line.pos.y += 20
 }
 
-function addLine(canvas) {
-    const newLine = { txt: 'Meme', size: 40, align: 'c', color: 'white', pos:{y: 80, x: 0}, isDrag: false}
+function addLine(canvas, txt = 'Meme', isEmojy = false) {
+    const newLine = { txt, size: 40, align: 'c', strokeColor: 'black', color: 'white', pos:{y: 80, x: 0}, isDrag: false}
     if(!gMeme.lines.length) newLine.pos.y = 80
     if(gMeme.lines.length === 1) newLine.pos.y = canvas.height - 80 + newLine.size
     else newLine.pos.y = canvas.height/2 + newLine.size/2
+    
+    if(isEmojy) newLine.pos.y = canvas.height/2 + newLine.size/2
     newLine.pos.x = canvas.width/2
     gMeme.lines.push(newLine)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
@@ -102,10 +122,16 @@ function changeFontSize(diff){
     console.log(line.size);
 }
 
-function setColor(color){
+function setColor(color, isFill){
     const line = _getCurrLine()
-    line.color = color
+    if(isFill) line.color = color
+    else line.strokeColor = color
 }
+
+// function setStrokeColor(color){
+//     const line = _getCurrLine()
+//     line.color = color
+// }
 
 function changTextAlign(pos, canvas) {
     const line = _getCurrLine()

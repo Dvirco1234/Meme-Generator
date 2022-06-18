@@ -17,6 +17,9 @@
 .flex.wrap {
     flex-wrap: wrap;
 }
+.flex.gap {
+    gap: .5em;
+}
 
 .grid {
     display: grid;

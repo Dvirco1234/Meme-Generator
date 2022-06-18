@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body onload="onInit()">
+    <div class="screen main-screen" onclick="toggleMenu()"></div>
+    <div class="screen modal-screen" onclick="toggleModal()"></div>
+
     <header class="main-header">
         <div class="header-content main-layout flex align-center space-between">
-            <div class="main-logo" onclick="openGallery()"><img src="img/logo/logo.png"></div>
+            <div class="main-logo flex align-center" onclick="openGallery()"><img src="img/logo/logo.png"></div>
             <ul class="main-nav flex">
                 <li class="nav-btns"><a href="#" onclick="openGallery()">Gallery</a></li>
                 <li class="nav-btns"><a href="#" onclick="openMyMemes()">My Memes</a></li>
@@ -22,16 +25,28 @@
 
     <section class="main-container main-layout">
         <section class="main-gallery">
-            <div class="search-bar flex align-center space-between">
-                <input class="filter-input" list="images" type="search" oninput="onSetFilter(this.value)" placeholder="Search Image">
-                <datalist id="images">
-                    <!-- <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Google Chrome">
-                    <option value="Opera">
-                    <option value="Safari"> -->
-                </datalist>
-                <button class="btn btn-gallery" onclick="onFlexChoose()">I'm Flexible</button>
+            <div class="search-bar flex align-center space-between gap">
+                <div>
+                    <input class="filter-input" list="images" type="search" oninput="onSetFilter(this.value)" placeholder="Search Image">
+                    <datalist id="images">
+                        <option value="movie">
+                        <option value="baby">
+                        <option value="funny">
+                        <option value="dog">
+                        <option value="cat">
+                    </datalist>
+                </div>
+                <div class="key-words">
+                    <span onclick="onSearchKeyWord('', this)">All </span>
+                    <span onclick="onSearchKeyWord('funny', this)">funny </span>
+                    <span onclick="onSearchKeyWord('movie', this)">movie </span>
+                    <span onclick="onSearchKeyWord('dog', this)">dog </span>
+                    <span onclick="onSearchKeyWord('politician', this)">politician </span>
+                    <span onclick="onSearchKeyWord('cat', this)">cat </span>
+                </div>
+                <div class="btn-flexible"><button class="btn btn-gallery" onclick="onFlexChoose()">I'm Flexible</button></div>
+                <div><input type="file" class="file-input btn btn-gallery" name="image" onchange="onImgInput(event)"/></div>
+                
             </div>
             <div class="gallery-imgs grid"></div>
         </section>
@@ -44,39 +59,55 @@
                     onclick1="draw(event)">
                 </canvas>
             </div>
-            <div class="meme-controls flex wrap">
-                <div class="actions flex justify-center align-center">
+            <!-- <div class="meme-control flex"> -->
+            <div class="meme-controls flex">
+                <div class="actions actions1 flex justify-center align-center">
                     <input class="meme-input" type="text" oninput="onEnterText(this.value)" placeholder="Meme Text Here">
-                </div>
-                <div class="actions flex justify-center align-center">
-                    <button class="btn act-btn" onclick="onMoveText('up')">&uarr;</button>
-                    <button class="btn act-btn" onclick="onMoveText('down')">&darr;</button>
+                    <!-- <button class="btn act-btn" onclick="onMoveText('up')">&uarr;</button>
+                    <button class="btn act-btn" onclick="onMoveText('down')">&darr;</button> -->
                     <button class="btn act-btn icon" onclick="onSelectNextLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
                     <button class="btn act-btn fa fa-plus" onclick="onAddLine()"></button>
                     <button class="btn act-btn fa fa-trash" onclick="onDeleteLine()"></button>
                 </div>
-                <div class="actions flex justify-center align-center">
+                <div class="actions actions2 flex justify-center align-center">
                     <button class="btn act-btn icon" onclick="onChangFontSize(2)"><img src="icons/increase font - icon.png"></button>
                     <button class="btn act-btn icon" onclick="onChangFontSize(-2)"><img src="icons/decrease font - icon.png"></button>
                     <button class="btn act-btn fa fa-align-l" onclick="onChangTextAlign('l')"></button>
                     <button class="btn act-btn fa fa-align-c" onclick="onChangTextAlign('c')"></button>
                     <button class="btn act-btn fa fa-align-r" onclick="onChangTextAlign('r')"></button>
-                    <select name="" class="btn act-btn"></select>
-                    <button class="btn act-btn icon txt"><img src="icons/text stroke.png"></button>
+                    <select name="" class="btn act-btn">
+                        <option value="impact">Impact</option>
+                    </select>
+                    <!-- <button class="btn act-btn icon txt"><img src="icons/text stroke.png"></button> -->
                     <div class="btn act-btn relative">
-                        <input class="btn act-btn color-input" type="color" value="#ffffff" onchange="onSetColor(this.value)">
+                        <input class="btn act-btn color-input" type="color" value="#000000" onchange="onSetColor(this.value, false)">
+                        <img class="icon paint-icon" src="icons/text stroke.png">
+                    </div>
+                    <div class="btn act-btn relative">
+                        <input class="btn act-btn color-input" type="color" value="#ffffff" onchange="onSetColor(this.value, true)">
                         <img class="icon paint-icon" src="icons/paint-board-and-brush.png">
                     </div>
                 </div>
-                <div class="actions flex align-center justify-center">
+                <div class="actions actions3 flex justify-center align-center">
+                    <div class="emojies flex align-center">
+                        <div class="scroll-btn" onclick="onSlideEmojies(false)">&lt;</div>
+                        <div class="emojies-container flex align-center"></div>
+                        <div class="scroll-btn" onclick="onSlideEmojies(true)">&gt;</div>
+                    </div>
+                </div>
+                <div class="actions actions4 flex align-center justify-center">
                     <!-- <div class="actions"></div> -->
                     <!-- <button class="btn-download" onclick="toggleModal()">Download</button> -->
-                    <a href="#" class="btn txt-btn btn-download" onclick="onDownloadMeme(this)" download="file-name">Download</a>
-                    <button class="btn txt-btn btn-save" onclick="onSaveMeme()">Save</button>
-                    <button class="btn txt-btn btn-share" onclick="onUploadImg()">Upload</button>
-                    <div class="share-container"></div>
+                    <button class="btn txt-btn btn-share" onclick="onUploadImg();toggleModal()">Share</button>
+                    <div class="modal">
+                        <button class="btn close-modal-btn" onclick="toggleModal()">X</button>
+                        <a href="#" class="btn modal-btn txt-btn btn-download" onclick="onDownloadMeme(this);toggleModal()" download="file-name">Download</a>
+                        <button class="btn modal-btn txt-btn btn-save" onclick="onSaveMeme();toggleModal()">Save</button>
+                        <div class="share-container"></div>
+                    </div>
                 </div>
             </div>
+        <!-- </div> -->
         </section>
         <section class="my-memes">
             <div class="memes-imgs grid"></div>
