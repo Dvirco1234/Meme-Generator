@@ -48,15 +48,18 @@
     font-size: 1em;
     flex-grow: 1;
     height: 100%;
-    /* max-width: 40%; */
     color: var(--clr1);
 }
 
-.key-words span:first-child {
+.key-words .words-container {
+    display: inline;
+}
+
+.key-words > span {
     color: var(--clr5);
     font-size: 1.5em;
 }
-.key-words span:nth-child(even) {
+.words-container span:nth-child(odd) {
     font-size: 1.5em;
 }
 
@@ -80,7 +83,4 @@
     content: 'Upload Image';
     padding: 0.3em;
     margin: 0;
-    /* top: 50%;
-    bottom: 50%;
-    transform: translate(-50% -50%); */
 }

@@ -6,6 +6,7 @@ var gCtx
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 function initEditMeme() {
+    onDisplaySection('meme-edit')
     gCanvas = document.querySelector('.my-canvas')
     gCtx = gCanvas.getContext('2d')
     resizeCanvas()
@@ -13,13 +14,6 @@ function initEditMeme() {
     addListeners()
     renderEmojies()
     renderMeme()
-}
-
-function openMemeEditor() {
-    document.querySelector('.main-gallery').style.display = 'none'
-    document.querySelector('.main-meme').style.display = 'flex'
-    document.querySelector('.my-memes').style.display = 'none'
-    // setCanvas(gCanvas)
 }
 
 function renderMeme() {
@@ -45,7 +39,6 @@ function addListeners() {
     addTouchListeners()
     window.addEventListener('resize', () => {
         resizeCanvas()
-        // renderCanvas()
         renderMeme()
     })
 }
@@ -64,7 +57,7 @@ function addTouchListeners() {
 
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!isTextClicked(pos, gCanvas)) {
+    if (!isLineClicked(pos, gCanvas)) {
         updateSelection(false)
         renderMeme()
         return
@@ -76,7 +69,7 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-    const line = getCurrLine()
+    const line = getCurrLine()    
     if (line.isDrag) {
         const pos = getEvPos(ev)
         const dx = pos.x - gStartPos.x
@@ -89,7 +82,6 @@ function onMove(ev) {
 
 function onUp() {
     setLineDrag(false)
-    // document.body.style.cursor = 'grab'
     document.querySelector('.my-canvas').style.cursor = 'grab'
 }
 
@@ -155,19 +147,29 @@ function scaleToFit(img) {
 }
 
 function onEnterText(txt) {
+    const txtLength = gCtx.measureText(txt).width
+    if(txtLength >= gCanvas.width - 60) return
     setLineTxt(txt)
     renderMeme()
 }
 
 function drawText(currLine) {
     const text = currLine.txt
-    // const txtLength = gCtx.measureText(text).width
-    // if(txtLength >= gCanvas.width - 60){
-
-    // }
-
     const align = currLine.align
-    // let x
+    onAligntext(align)
+
+    const y = currLine.pos.y
+    const x = currLine.pos.x
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = currLine.strokeColor
+    gCtx.fillStyle = currLine.color
+    gCtx.font = `${currLine.size}px ${currLine.font}`
+    gCtx.fillText(text, x, y)
+    gCtx.strokeText(text, x, y)
+    if (currLine.isSelected) renderSelectBorder(currLine)
+}
+
+function onAligntext(align){
     switch (align) {
         case 'c':
             gCtx.textAlign = 'center'
@@ -179,17 +181,8 @@ function drawText(currLine) {
             gCtx.textAlign = 'end'
             break
     }
-    const y = currLine.pos.y
-    const x = currLine.pos.x
-
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = currLine.strokeColor
-    gCtx.fillStyle = currLine.color
-    gCtx.font = `${currLine.size}px Impact`
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
-    if (currLine.isSelected) renderSelectBorder(currLine)
 }
+
 
 function onMoveText(direc) {
     moveText(direc)
@@ -213,16 +206,20 @@ function onSelectNextLine() {
     document.querySelector('.meme-input').value = line.txt
     updateSelection(true)
     renderMeme()
-    // renderSelectBorder()
 }
 
-function onChangFontSize(diff) {
-    changeFontSize(diff)
+function onSetFont(font){
+    setFont(font)
     renderMeme()
 }
 
-function onChangTextAlign(pos) {
-    changTextAlign(pos, gCanvas)
+function onSetFontSize(diff) {
+    setFontSize(diff)
+    renderMeme()
+}
+
+function onSetTextAlign(pos) {
+    setTextAlign(pos, gCanvas)
     renderMeme()
 }
 
@@ -232,6 +229,8 @@ function onSetColor(color, isFill) {
 }
 
 function onUploadImg() {
+    updateSelection(false)
+    renderMeme()
     uploadImg()
 }
 
@@ -244,27 +243,40 @@ function onDownloadMeme(elLink) {
 function onSaveMeme() {
     const data = gCanvas.toDataURL()
     saveMeme(data)
-    openMyMemes()
+    onDisplaySection('my-memes')
+    renderSavedMemes()
 }
 
-//     const txtLength = gCtx.measureText(text).width
+function renderSavedMemes(){
+    const memes = getSavedMemes()
+    var strHTML = ''
+
+    memes.map((meme, i) => {
+        strHTML += `<artice class="image" onclick="onMemeSelect(${i})"><img class="image${i}" src="${meme.url}"></artice>`
+    })
+    document.querySelector('.memes-imgs').innerHTML = strHTML
+}
+
+function onMemeSelect(idx){
+    setMemeForEdit(idx)
+    onDisplaySection('meme-edit')
+    initEditMeme()
+}
+
 
 function renderSelectBorder(line) {
     const y = line.pos.y - line.size - 10
     const x = line.pos.x - gCanvas.width / 2 + 20
-    // const x = 20
     const z = line.size + 30
-    drawRect(x, y, z)
+    drawLineBorder(x, y, z)
 }
 
-function drawRect(x, y, z) {
+function drawLineBorder(x, y, z) {
     gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.rect(x, y, gCanvas.width - 40, z)
-    // gCtx.rect(x, y, gCanvas.width - x*2, z)
     gCtx.fillStyle = '#00000000'
     gCtx.fillRect(x, y, gCanvas.width - 40, z)
-    // gCtx.fillRect(x, y, gCanvas.width - x*2, z)
     gCtx.strokeStyle = '#8a8a8a'
     gCtx.stroke()
 }

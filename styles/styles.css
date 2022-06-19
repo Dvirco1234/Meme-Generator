@@ -4,20 +4,17 @@
 
 /* BASE */
 @import 'basic/base.css';
-@import 'basic/buttons.css';
 @import 'basic/layout.css';
 @import 'basic/helpers.css';
 
 /* COMPONENTS */
 @import 'components/gallery/gallery.css';
 @import 'components/meme/meme-edit.css';
-@import 'components/my-memes.css';
+@import 'components/meme/my-memes.css';
 @import 'components/main-header.css';
 @import 'components/footer.css';
 @import 'components/screen.css';
-/* @import 'components/card.css';
-@import 'components/page-nav.css';
-@import 'components/modal.css'; */
+/* @import 'components/modal.css'; */
 
 /* Media Queries */
 @import 'mq/mq.css';

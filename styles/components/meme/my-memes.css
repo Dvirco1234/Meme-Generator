@@ -1,0 +1,8 @@
+.my-memes .memes-imgs {
+    grid-template-columns: repeat(auto-fill, minmax(150px , 1fr));
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.my-memes .memes-imgs .image:hover {
+    cursor: pointer;
+}

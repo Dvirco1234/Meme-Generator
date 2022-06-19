@@ -8,7 +8,6 @@
         flex-flow: row wrap;
         justify-content: center;
         align-content: center;
-        /* width: 100%; */
         max-height: 0;
         transform-origin: 0px;
         overflow: hidden;
@@ -18,7 +17,6 @@
 
     .header-content .main-nav > * {
         background-color: var(--clr1);
-        /* width: 100%; */
         flex-basis: 100%;
         height: 50px;
         box-shadow: 0 0 0 black;
@@ -59,7 +57,6 @@
         top: 50%;
         right: 5px;
         transform: translateY(-50%);
-        /* margin-inline-end: 22px; */
         background-color: rgba(0, 0, 0, 0);
         border: none;
         color: var(--clr3);
@@ -85,13 +82,12 @@
         flex-direction: column;
     }
 
-    .main-container .main-meme {
+    .main-container .meme-edit {
         flex-direction: column;
     }
     
     .canvas-container {
         flex-basis: 100%;
-        /* margin-bottom: 20px; */
         margin: 20px 5px;
         height: 100vw;
     }
@@ -133,17 +129,17 @@
     .main-layout {
         max-width: 640px;
     }
-    .main-container .main-meme {
+    .main-container .meme-edit {
         flex-direction: column;
     }
     
     .canvas-container {
-        flex-basis: 100%;
+        width: 100%;
         margin-bottom: 20px;
     }
     
     .meme-controls {
-        flex-basis: 100%;
+        width: 100%;
     }
 
     .menu-toggle {
@@ -170,7 +166,7 @@
         max-width: 1100px;
     }
 
-    .main-container .main-meme {
+    .main-container .meme-edit {
         flex-direction: row;
     }
 
@@ -182,8 +178,7 @@
         width: 50%;
     }
 
-    .main-meme {
-        /* margin-bottom: 15vh; */
+    .meme-edit {
         min-height: 80%;
     }
 

@@ -13,22 +13,22 @@
 
     <header class="main-header">
         <div class="header-content main-layout flex align-center space-between">
-            <div class="main-logo flex align-center" onclick="openGallery()"><img src="img/logo/logo.png"></div>
+            <div class="main-logo flex align-center" onclick="onDisplaySection('main-gallery')"><img src="img/logo/logo.png"></div>
             <ul class="main-nav flex">
-                <li class="nav-btns"><a href="#" onclick="openGallery()">Gallery</a></li>
-                <li class="nav-btns"><a href="#" onclick="openMyMemes()">My Memes</a></li>
+                <li class="nav-btns"><a href="#" onclick="onDisplaySection('main-gallery')">Gallery</a></li>
+                <li class="nav-btns"><a href="#" onclick="onDisplaySection('my-memes');renderSavedMemes()">My Memes</a></li>
                 <li class="nav-btns"><a href="#">About</a></li>
             </ul>
             <button class="menu-toggle" onclick="toggleMenu()"><span>☰</span></button>
         </div>
     </header>
 
-    <section class="main-container main-layout">
-        <section class="main-gallery">
+    <main class="main-container main-layout">
+        <section class="main main-gallery">
             <div class="search-bar flex align-center space-between gap">
                 <div>
                     <input class="filter-input" list="images" type="search" oninput="onSetFilter(this.value)" placeholder="Search Image">
-                    <datalist id="images">
+                    <datalist id="images" class="images-data-list">
                         <option value="movie">
                         <option value="baby">
                         <option value="funny">
@@ -38,20 +38,17 @@
                 </div>
                 <div class="key-words">
                     <span onclick="onSearchKeyWord('', this)">All </span>
-                    <span onclick="onSearchKeyWord('funny', this)">funny </span>
-                    <span onclick="onSearchKeyWord('movie', this)">movie </span>
-                    <span onclick="onSearchKeyWord('dog', this)">dog </span>
-                    <span onclick="onSearchKeyWord('politician', this)">politician </span>
-                    <span onclick="onSearchKeyWord('cat', this)">cat </span>
+                    <div class="words-container"></div>
+                    <span onclick="onOpenMoreKeyWord('', this)">More...</span>
                 </div>
-                <div class="btn-flexible"><button class="btn btn-gallery" onclick="onFlexChoose()">I'm Flexible</button></div>
+                <div class="btn-flexible"><button class="btn btn-gallery" onclick="onFlexibleMeme()">I'm Flexible</button></div>
                 <div><input type="file" class="file-input btn btn-gallery" name="image" onchange="onImgInput(event)"/></div>
                 
             </div>
             <div class="gallery-imgs grid"></div>
         </section>
 
-        <section class="main-meme flex">
+        <section class="main meme-edit flex">
             <div class="canvas-container">
                 <canvas class="my-canvas"
                     height="450"
@@ -59,26 +56,24 @@
                     onclick1="draw(event)">
                 </canvas>
             </div>
-            <!-- <div class="meme-control flex"> -->
-            <div class="meme-controls flex">
-                <div class="actions actions1 flex justify-center align-center">
-                    <input class="meme-input" type="text" oninput="onEnterText(this.value)" placeholder="Meme Text Here">
-                    <!-- <button class="btn act-btn" onclick="onMoveText('up')">&uarr;</button>
-                    <button class="btn act-btn" onclick="onMoveText('down')">&darr;</button> -->
-                    <button class="btn act-btn icon" onclick="onSelectNextLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+            <div class="meme-controls grid">
+                <div class="actions actions1 grid justify-center align-center">
+                    <input class="meme-input" type="search" oninput="onEnterText(this.value)" placeholder="Meme Text Here">
+                    <button class="btn act-btn icon btn-select-line" onclick="onSelectNextLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
                     <button class="btn act-btn fa fa-plus" onclick="onAddLine()"></button>
                     <button class="btn act-btn fa fa-trash" onclick="onDeleteLine()"></button>
                 </div>
-                <div class="actions actions2 flex justify-center align-center">
-                    <button class="btn act-btn icon" onclick="onChangFontSize(2)"><img src="icons/increase font - icon.png"></button>
-                    <button class="btn act-btn icon" onclick="onChangFontSize(-2)"><img src="icons/decrease font - icon.png"></button>
-                    <button class="btn act-btn fa fa-align-l" onclick="onChangTextAlign('l')"></button>
-                    <button class="btn act-btn fa fa-align-c" onclick="onChangTextAlign('c')"></button>
-                    <button class="btn act-btn fa fa-align-r" onclick="onChangTextAlign('r')"></button>
-                    <select name="" class="btn act-btn">
-                        <option value="impact">Impact</option>
+                <div class="actions actions2 grid justify-center align-center space-between">
+                    <button class="btn act-btn icon" onclick="onSetFontSize(2)"><img src="icons/increase font - icon.png"></button>
+                    <button class="btn act-btn icon" onclick="onSetFontSize(-2)"><img src="icons/decrease font - icon.png"></button>
+                    <button class="btn act-btn fa fa-align-l" onclick="onSetTextAlign('l')"></button>
+                    <button class="btn act-btn fa fa-align-c" onclick="onSetTextAlign('c')"></button>
+                    <button class="btn act-btn fa fa-align-r" onclick="onSetTextAlign('r')"></button>
+                    <select name="" class="btn act-btn" onchange="onSetFont(this.value)">
+                        <option value="Impact">Impact</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Montserrat-Regular">Montserrat</option>
                     </select>
-                    <!-- <button class="btn act-btn icon txt"><img src="icons/text stroke.png"></button> -->
                     <div class="btn act-btn relative">
                         <input class="btn act-btn color-input" type="color" value="#000000" onchange="onSetColor(this.value, false)">
                         <img class="icon paint-icon" src="icons/text stroke.png">
@@ -88,17 +83,15 @@
                         <img class="icon paint-icon" src="icons/paint-board-and-brush.png">
                     </div>
                 </div>
-                <div class="actions actions3 flex justify-center align-center">
+                <div class="actions actions3 grid justify-center align-center">
                     <div class="emojies flex align-center">
                         <div class="scroll-btn" onclick="onSlideEmojies(false)">&lt;</div>
                         <div class="emojies-container flex align-center"></div>
                         <div class="scroll-btn" onclick="onSlideEmojies(true)">&gt;</div>
                     </div>
                 </div>
-                <div class="actions actions4 flex align-center justify-center">
-                    <!-- <div class="actions"></div> -->
-                    <!-- <button class="btn-download" onclick="toggleModal()">Download</button> -->
-                    <button class="btn txt-btn btn-share" onclick="onUploadImg();toggleModal()">Share</button>
+                <div class="actions actions4 grid align-center justify-center">
+                    <button class="btn txt-btn btn-share" onclick="onUploadImg();toggleModal()">Upload</button>
                     <div class="modal">
                         <button class="btn close-modal-btn" onclick="toggleModal()">X</button>
                         <a href="#" class="btn modal-btn txt-btn btn-download" onclick="onDownloadMeme(this);toggleModal()" download="file-name">Download</a>
@@ -107,24 +100,22 @@
                     </div>
                 </div>
             </div>
-        <!-- </div> -->
         </section>
-        <section class="my-memes">
+        <section class="main my-memes">
             <div class="memes-imgs grid"></div>
         </section>
-    </section>
+    </main>
     <footer class="main-footer flex align-center space-between">
         <div class="main-logo"><img src="img/logo/logo.png" alt=""></div>
         <small>&#169; Dvir Cohen 2022</small>
     </footer>
 
-    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/storage-service.js"></script>
     <script src="js/services/utils-service.js"></script>
     <script src="js/services/upload-service.js"></script>
-    <script src="js/services/galleryService.js"></script>
-    <script src="js/services/memeService.js"></script>
-    <script src="js/galleryController.js"></script>
-    <script src="js/memeController.js"></script>
-    <script src="js/myMemesController.js"></script>
+    <script src="js/services/gallery-service.js"></script>
+    <script src="js/services/meme-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+    <script src="js/meme-controller.js"></script>
 </body>
 </html>

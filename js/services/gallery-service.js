@@ -1,12 +1,8 @@
 'use strict'
 
 const IMGS_KEY = 'imgsDB'
-var gImgs = []
 var gFilterTxt = ''
-// var gKeywordSearchCountMap = {'funny': 12,'cat': 16, 'baby': 3}
-
-// createImages()
-gImgs = [
+var gImgs = [
     {id: 0, url: `img/0.jpg`, keyWords: ['movie', 'nerd']},
     {id: 1, url: `img/1.jpg`, keyWords: ['funny', 'nerd', 'politician']},
     {id: 2, url: `img/2.jpg`, keyWords: ['cute', 'dog']},
@@ -36,9 +32,14 @@ function getImages(){
     return gImgs
 }
 function getImagesForDisplay(){
+    loadMyImgs()
     var imgs = gImgs
     if(gFilterTxt) imgs = imgs.filter((img) => img.keyWords.join('').includes(gFilterTxt))
     return imgs
+}
+
+function getKeyWords() {
+    return ['funny', 'movie', 'dog', 'cat']
 }
 
 function getImgByIdx(imgIdx){
@@ -55,14 +56,12 @@ function addImgToGallery(img) {
     const id = gImgs.length
     const image = {id, url, keyWords: ['my pictures']}
     gImgs.push(image)
-    // _saveImgsToStorage()
+    _saveImgsToStorage()
     renderGallery()
 }
 
 function scaleToFit(img){
-    // get the scale
     var scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-    // get the top left position of the image
     var x = (canvas.width / 2) - (img.width / 2) * scale;
     var y = (canvas.height / 2) - (img.height / 2) * scale;
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
@@ -71,14 +70,3 @@ function scaleToFit(img){
 function _saveImgsToStorage() {
 	saveToStorage(IMGS_KEY, gImgs)
 }
-
-// function createImages(){
-//     // var image = {}
-//     for(var i = 0; i < 18; i++){
-//         const image = {
-//             id: i,
-//             url: `img/${i}.jpg`,
-//         }
-//         gImgs.push(image)
-//     }
-// }

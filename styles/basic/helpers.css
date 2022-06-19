@@ -43,3 +43,7 @@
 .fa {
     font-family: fa-solid;
 }
+
+.none {
+    display: none;
+}
